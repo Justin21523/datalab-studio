@@ -29,12 +29,13 @@ Goal: a working end-to-end path from CSV import to preview/profile in the deskto
 | GET    | `/api/v1/datasets/{id}/preview`     | Preview first rows            |
 | GET    | `/api/v1/datasets/{id}/profile`     | Profiling summary             |
 
-## Phase 2 — Profiling depth
+## Phase 2 — Profiling depth (current)
 
-- Numeric stats: min, max, mean, median, standard deviation
-- Category frequency distributions
-- Duplicate row detection
-- Back profiling with Tablesaw
+- [x] Numeric stats: min, max, mean, median, standard deviation
+- [x] Category frequency distributions (top-N per categorical column)
+- [x] Duplicate row detection
+- [x] Back profiling with Tablesaw
+- [x] Surface the above in the desktop Profile tab
 
 ## Phase 3 — Cleaning pipeline
 

@@ -115,16 +115,23 @@ Returns up to `N` rows (default from `datalab.storage.preview-rows`).
 
 ### `GET /api/v1/datasets/{id}/profile`
 
-Returns a profiling summary.
+Returns a profiling summary (computed with Tablesaw). Each column carries
+presence/uniqueness metrics plus **either** `numericStats` (numeric columns)
+**or** `topCategories` (categorical columns); the unused one is omitted.
+`duplicateRowCount` reports rows that exactly repeat an earlier row.
 
 ```json
 {
   "success": true,
   "data": {
-    "datasetId": 1, "rowCount": 4, "columnCount": 5,
+    "datasetId": 1, "rowCount": 4, "columnCount": 3, "duplicateRowCount": 1,
     "columns": [
-      { "column": "name", "type": "STRING",
-        "missingCount": 1, "missingPercentage": 25.0, "uniqueCount": 3 }
+      { "column": "score", "type": "DECIMAL",
+        "missingCount": 0, "missingPercentage": 0.0, "uniqueCount": 4,
+        "numericStats": { "min": 6.0, "max": 9.5, "mean": 7.69, "median": 7.62, "stddev": 1.49 } },
+      { "column": "city", "type": "STRING",
+        "missingCount": 1, "missingPercentage": 25.0, "uniqueCount": 2,
+        "topCategories": [ { "value": "Taipei", "count": 2 }, { "value": "Tokyo", "count": 1 } ] }
     ]
   }
 }
