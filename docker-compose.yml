@@ -1,0 +1,26 @@
+# Local development stack for DataLab Studio.
+# Usage:
+#   cp .env.example .env
+#   docker compose up -d
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: datalab-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-datalab}
+      POSTGRES_USER: ${POSTGRES_USER:-datalab}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-datalab}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - datalab-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-datalab} -d ${POSTGRES_DB:-datalab}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  datalab-pgdata:
+    name: datalab-pgdata
