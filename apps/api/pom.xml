@@ -61,6 +61,12 @@
             <artifactId>poi-ooxml</artifactId>
         </dependency>
 
+        <!-- Data profiling / statistics -->
+        <dependency>
+            <groupId>tech.tablesaw</groupId>
+            <artifactId>tablesaw-core</artifactId>
+        </dependency>
+
         <!-- Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
